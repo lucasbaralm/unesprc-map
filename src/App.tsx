@@ -5,7 +5,9 @@ import UnespMap from './components/UnespMap'
 function App() {
 
   return (
-    <UnespMap />
+    <div style={{ height: '100vh', width: '100vw' }}>
+      <UnespMap />
+    </div>
   )
 }
 
