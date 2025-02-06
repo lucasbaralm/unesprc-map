@@ -1,8 +1,10 @@
-# Unesp Map Project
+# Unesp RC Map Project
 
-![Unesp Map](./src/assets/readme.png)
+<p align="center">
+  <img src="./src/assets/readme.png" alt="Unesp Map">
+</p>
 
-This project is a web application that provides an interactive map for locating various points of interest within the Unesp campus. It is built using React, TypeScript, and Vite, ensuring a fast and efficient development experience.
+This project is a web application that provides an interactive map for locating various points of interest within the Unesp RC campus. It is built using React, TypeScript, and Vite, ensuring a fast and efficient development experience.
 
 ## Features
 
@@ -21,9 +23,3 @@ This project is a web application that provides an interactive map for locating 
 ## Live Project
 
 You can view the live project at [Unesp Map](https://unesprc-map.vercel.app/).
-
-## Expanding the ESLint Configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
