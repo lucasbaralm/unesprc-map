@@ -7,6 +7,13 @@ import orangeMarker from '../assets/markers/marker-icon-2x-orange.png';
 import greyMarker from '../assets/markers/marker-icon-2x-grey.png';
 import goldMarker from '../assets/markers/marker-icon-2x-gold.png';
 import blackMarker from '../assets/markers/marker-icon-2x-black.png';
+import cianMarker from '../assets/markers/marker-icon-2x-cian.png';
+import deeporangeMarker from '../assets/markers/marker-icon-2x-deeporange.png';
+import deepredMarker from '../assets/markers/marker-icon-2x-deepred.png';
+import deepvioletMarker from '../assets/markers/marker-icon-2x-deepviolet.png';
+import navyMarker from '../assets/markers/marker-icon-2x-navy.png';
+import pinkMarker from '../assets/markers/marker-icon-2x-pink.png';
+import wineMarker from '../assets/markers/marker-icon-2x-wine.png';
 import { Icon } from 'leaflet';
 
 export const icons = {
@@ -47,7 +54,7 @@ export const icons = {
     popupAnchor: [1, -34],
   }),
   unidadeSaude: new Icon({
-    iconUrl: yellowMarker,
+    iconUrl: navyMarker,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],

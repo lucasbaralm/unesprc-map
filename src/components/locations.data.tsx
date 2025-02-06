@@ -1,7 +1,7 @@
 export type Location = {
   name: string;
   position: [number, number];
-  category: 'mercado' | 'padaria' | 'hortifrutti/mercearia' | 'bar' | 'farmacia' | 'academia' | 'unidadeSaude' | 'entrada' | 'shopping'|'rodoviaria';
+  category: 'mercado' | 'padaria' | 'hortifrutti/mercearia' | 'bar' | 'farmacia' | 'academia' | 'unidadeSaude' | 'entrada' | 'shopping'|'rodoviaria'| 'restaurante' | 'caixaEletronico';
   address: string;
 };
 
