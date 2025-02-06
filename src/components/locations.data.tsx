@@ -1,7 +1,7 @@
 export type Location = {
   name: string;
   position: [number, number];
-  category: 'mercado' | 'padaria' | 'hortifrutti/mercearia' | 'bar' | 'farmacia' | 'academia' | 'unidadeSaude' | 'entrada' | 'shopping';
+  category: 'mercado' | 'padaria' | 'hortifrutti/mercearia' | 'bar' | 'farmacia' | 'academia' | 'unidadeSaude' | 'entrada' | 'shopping'|'rodoviaria';
   address: string;
 };
 
@@ -187,6 +187,11 @@ export const locations: Location[] = [
       position: [-22.413604859677502, -47.55397309309728],
       category: 'shopping',
       address: 'Av. Conde Francisco Matarazzo Júnior, 205 - Vila Paulista/Centro'
+    },
+    {name: 'Rodoviária de Rio Claro',
+    position: [-22.41705975425777, -47.57590536434472],
+    category: 'rodoviaria',
+    address: 'Av. Pres. Tancredo de Almeida Neves, 700 - Jardim Claret'
     }
 
   ];

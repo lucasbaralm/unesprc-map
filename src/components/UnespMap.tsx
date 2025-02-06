@@ -124,6 +124,7 @@ const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Lo
             <option value="unidadeSaude">Unidade de Saúde</option>
             <option value="entrada">Entrada</option>
             <option value="shopping">Shopping</option>
+            <option value="rodoviaria">Rodoviária</option>
           </select>
         </div>
       </div>

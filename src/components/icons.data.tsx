@@ -63,5 +63,11 @@ export const icons = {
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-  })
+  }),
+  rodoviaria: new Icon({
+    iconUrl: greyMarker,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  }),
 };
