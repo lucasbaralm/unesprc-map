@@ -65,7 +65,7 @@ const SearchBar = ({ locations }: { locations: Array<Location> }) => {
             <div
               key={index}
               onClick={() => handleSuggestionClick(suggestion)}
-              className="p-2 cursor-pointer border-bottom"
+              className="p-2 cursor-pointer border-bottom text-primary"
             >
               {suggestion.name}
             </div>
@@ -112,8 +112,9 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
         boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
         width: '300px'
       }}>
+        <div className="d-flex justify-content-between">
         <label htmlFor="category-select">Filtrar por categoria:  </label>
-        <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} className="form-select-small mt-1">
+        <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} style={{'width':'80%','height':'10%'}} className="form-select-sm rounded mt-1">
           <option value="all">Todas</option>
           <option value="mercado">Mercado</option>
           <option value="padaria">Padaria</option>
@@ -125,6 +126,7 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
           <option value="entrada">Entrada</option>
           <option value="shopping">Shopping</option>
         </select>
+        </div>
       </div>
       {showPopup && (
         <div style={{
@@ -142,14 +144,19 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
           width: '300px'
         }}>
           <h4>Locais filtrados:</h4>
-          <ul>
+          <div className="row">
             {filteredLocations.map((location, index) => (
-              <li key={index} onClick={() => handleLocationClick(location.position)} className="list-group-item list-group-item-action cursor-pointer">
-                {location.name}
-              </li>
+              <div key={index} className="col-md-6 mb-3">
+                <div className="card cursor-pointer" onClick={() => handleLocationClick(location.position)}>
+                  <div className="card-body">
+                    <strong><p className="card-title text-primary">{location.name}</p></strong>
+                    <p className="card-text">{location.address}</p>
+                  </div>
+                </div>
+              </div>
             ))}
-          </ul>
-          <button onClick={() => setShowPopup(false)} style={{ marginTop: '10px' }} className="btn btn-primary btn-sm mt-2">Fechar</button>
+          </div>
+          <button onClick={() => setShowPopup(false)} className="btn btn-secondary mt-2">Fechar</button>
         </div>
       )}
     </>
@@ -165,56 +172,40 @@ const UnespMap: React.FC = () => {
 
 
   return (
-    <div style={{ position: 'relative' }}>
-      <button
-        onClick={toggleInfo}
-        className="btn btn-info rounded-circle btn-sm"
-        style={{
-          position: 'absolute',
-          top: '80%',
-          left: '85%',
-          zIndex: 1000,
-          width: '40px',
-          height: '40px',
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          cursor: 'pointer'
-        }}
-      >
-        ?
-      </button>
-      {showInfo && (
-        <div style={{
-          position: 'absolute',
-          top: '10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 1000,
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)'
-        }}>
-          <button
-            onClick={toggleInfo}
-            className="btn-close"
-            style={{
-              position: 'absolute',
-              top: '0%',
-              right: '0%',
-              zIndex: 1001
-            }}
-          />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis, nunc nec aliquam vulputate, ipsum diam scelerisque sapien, quis pulvinar dolor sapien aliquam nulla. Vivamus eleifend ante vel elementum eleifend. Morbi sapien justo, convallis at ipsum in, dignissim consequat neque. Quisque tristique tellus nec convallis ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vehicula enim non dignissim commodo. Nulla facilisi.
-          </p>
-          <p>
+    <div className="position-relative">
+    <button
+      onClick={toggleInfo}
+      className="btn btn-info rounded-circle btn-sm position-absolute"
+      style={{
+        top: '80%',
+        left: '85%',
+        zIndex: 1000,
+        width: '40px',
+        height: '40px',
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+        cursor: 'pointer'
+      }}
+    >
+      ?
+    </button>
+    {showInfo && (
+      <div className="position-absolute bg-white rounded shadow" style={{ top: '10%', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, width: '80%' }}>
+        <button
+          onClick={toggleInfo}
+          className="btn-close float-end"
+          style={{ zIndex: 1001 }}
+        />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis, nunc nec aliquam vulputate, ipsum diam scelerisque sapien, quis pulvinar dolor sapien aliquam nulla. Vivamus eleifend ante vel elementum eleifend. Morbi sapien justo, convallis at ipsum in, dignissim consequat neque. Quisque tristique tellus nec convallis ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vehicula enim non dignissim commodo. Nulla facilisi.
+        </p>
+        <p>
+          lucasbaralm@gmail.com
+        </p>
+      </div>
+  )}
 
-            lucasbaralm@gmail.com
-          </p>
-
-        </div>
-      )}
       <MapContainer center={[-22.396403727665906, -47.54857750418907]} zoom={16} scrollWheelZoom={true}>
         <SearchBar locations={locations} />
         <FilterBar locations={locations} />
