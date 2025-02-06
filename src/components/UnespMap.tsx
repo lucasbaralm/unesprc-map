@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { icons } from './icons.data';
 import { locations } from './locations.data';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Search component with flyTo functionality
 const SearchBar = ({ locations }: { locations: Array<{ name: string; position: [number, number] }>, map: any }) => {
@@ -44,23 +45,7 @@ const SearchBar = ({ locations }: { locations: Array<{ name: string; position: [
         placeholder="🔍 Buscar local..."
         value={search}
         onChange={handleSearch}
-        style={{
-          padding: '12px 16px',
-          width: '100%',
-          borderRadius: '8px',
-          border: '1px solid #e0e0e0',
-          fontSize: '14px',
-          outline: 'none',
-          boxSizing: 'border-box',
-          transition: 'all 0.2s ease',
-          '::placeholder': {
-            color: '#999'
-          },
-          ':focus': {
-            borderColor: '#2196f3',
-            boxShadow: '0 0 0 3px rgba(33, 150, 243, 0.1)'
-          }
-        }}
+        className='form-control'
       />
       {suggestions.length > 0 && (
         <div style={{
@@ -80,17 +65,7 @@ const SearchBar = ({ locations }: { locations: Array<{ name: string; position: [
             <div
               key={index}
               onClick={() => handleSuggestionClick(suggestion)}
-              style={{
-                padding: '12px 16px',
-                cursor: 'pointer',
-                borderBottom: index < suggestions.length - 1 ? '1px solid #f0f0f0' : 'none',
-                transition: 'background-color 0.2s ease',
-                fontSize: '14px',
-                color: '#333',
-                ':hover': {
-                  backgroundColor: '#f5f9ff'
-                }
-              }}
+              className="p-2 cursor-pointer border-bottom"
             >
               {suggestion.name}
             </div>
@@ -109,7 +84,7 @@ const FilterBar = ({ locations }: { locations: Array<{ name: string; position: [
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
-    if (e.target.value !== 'all'){
+    if (e.target.value !== 'all') {
       setShowPopup(true);
     }
     const filtered = e.target.value === 'all'
@@ -127,7 +102,7 @@ const FilterBar = ({ locations }: { locations: Array<{ name: string; position: [
     <>
       <div style={{
         position: 'absolute',
-        top: '80px',
+        top: '90%',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 1000,
@@ -137,8 +112,8 @@ const FilterBar = ({ locations }: { locations: Array<{ name: string; position: [
         boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
         width: '300px'
       }}>
-        <label htmlFor="category-select">Filtrar por categoria:</label>
-        <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} style={{ marginLeft: '10px' }}>
+        <label htmlFor="category-select">Filtrar por categoria:  </label>
+        <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} className="form-select-small mt-1">
           <option value="all">Todas</option>
           <option value="mercado">Mercado</option>
           <option value="padaria">Padaria</option>
@@ -169,12 +144,12 @@ const FilterBar = ({ locations }: { locations: Array<{ name: string; position: [
           <h4>Locais filtrados:</h4>
           <ul>
             {filteredLocations.map((location, index) => (
-              <li key={index} onClick={() => handleLocationClick(location.position)} style={{ cursor: 'pointer' }}>
+              <li key={index} onClick={() => handleLocationClick(location.position)} className="list-group-item list-group-item-action cursor-pointer">
                 {location.name}
               </li>
             ))}
           </ul>
-          <button onClick={() => setShowPopup(false)} style={{ marginTop: '10px' }}>Fechar</button>
+          <button onClick={() => setShowPopup(false)} style={{ marginTop: '10px' }} className="btn btn-primary btn-sm mt-2">Fechar</button>
         </div>
       )}
     </>
@@ -182,32 +157,90 @@ const FilterBar = ({ locations }: { locations: Array<{ name: string; position: [
 };
 
 const UnespMap: React.FC = () => {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const toggleInfo = () => {
+    setShowInfo(!showInfo);
+  };
+
+
   return (
-    <MapContainer center={[-22.396403727665906, -47.54857750418907]} zoom={16} scrollWheelZoom={true}>
-      <SearchBar locations={locations}/>
-      <FilterBar locations={locations}/>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {locations.map((location, index) => (
-        <Marker
-          key={index}
-          position={location.position}
-          icon={icons[location.category]}
-        >
-          <Popup>
-            <strong>{location.name}</strong>
-            <br></br>
-            {location.address}
-            <br></br>
-            <a href={`https://www.google.com/maps/search/?api=1&query=${location.position[0]},${location.position[1]}`} target="_blank" rel="noopener noreferrer">
-              Ver no Google Maps
-            </a>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <div style={{ position: 'relative' }}>
+      <button
+        onClick={toggleInfo}
+        className="btn btn-info rounded-circle btn-sm"
+        style={{
+          position: 'absolute',
+          top: '80%',
+          left: '85%',
+          zIndex: 1000,
+          width: '40px',
+          height: '40px',
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer'
+        }}
+      >
+        ?
+      </button>
+      {showInfo && (
+        <div style={{
+          position: 'absolute',
+          top: '10%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 1000,
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)'
+        }}>
+          <button
+            onClick={toggleInfo}
+            className="btn-close"
+            style={{
+              position: 'absolute',
+              top: '0%',
+              right: '0%',
+              zIndex: 1001
+            }}
+          />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis, nunc nec aliquam vulputate, ipsum diam scelerisque sapien, quis pulvinar dolor sapien aliquam nulla. Vivamus eleifend ante vel elementum eleifend. Morbi sapien justo, convallis at ipsum in, dignissim consequat neque. Quisque tristique tellus nec convallis ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vehicula enim non dignissim commodo. Nulla facilisi.
+          </p>
+          <p>
+
+            lucasbaralm@gmail.com
+          </p>
+
+        </div>
+      )}
+      <MapContainer center={[-22.396403727665906, -47.54857750418907]} zoom={16} scrollWheelZoom={true}>
+        <SearchBar locations={locations} />
+        <FilterBar locations={locations} />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {locations.map((location, index) => (
+          <Marker
+            key={index}
+            position={location.position}
+            icon={icons[location.category]}
+          >
+            <Popup>
+              <strong>{location.name}</strong>
+              <br></br>
+              {location.address}
+              <br></br>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${location.position[0]},${location.position[1]}`} target="_blank" rel="noopener noreferrer">
+                Ver no Google Maps
+              </a>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 };
 
