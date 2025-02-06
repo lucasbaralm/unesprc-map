@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { icons } from './icons.data';
-import { locations } from './locations.data';
+import { Location, locations } from './locations.data';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Search component with flyTo functionality
-const SearchBar = ({ locations }: { locations: Array<{ name: string; position: [number, number] }>, map: any }) => {
+const SearchBar = ({ locations }: { locations: Array<Location> }) => {
   const map = useMap();
   const [search, setSearch] = useState('');
-  const [suggestions, setSuggestions] = useState<Array<{ name: string; position: [number, number] }>>([]);
+  const [suggestions, setSuggestions] = useState<Array<Location>>([]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -22,7 +22,7 @@ const SearchBar = ({ locations }: { locations: Array<{ name: string; position: [
     setSuggestions(value ? filtered : []);
   };
 
-  const handleSuggestionClick = (location: { name: string; position: [number, number] }) => {
+  const handleSuggestionClick = (location: Location) => {
     setSearch(location.name);
     setSuggestions([]);
     map.flyTo(location.position, 18);
@@ -76,7 +76,7 @@ const SearchBar = ({ locations }: { locations: Array<{ name: string; position: [
   );
 };
 
-const FilterBar = ({ locations }: { locations: Array<{ name: string; position: [number, number] }>, map: any }) => {
+const FilterBar = ({ locations }: { locations: Array<Location> }) => {
   const map = useMap();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [showPopup, setShowPopup] = useState<boolean>(false);
