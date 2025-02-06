@@ -1,10 +1,10 @@
-# Unesp Map Project
+# Unesp RC Map Project
 
 <p align="center">
   <img src="./src/assets/readme.png" alt="Unesp Map">
 </p>
 
-This project is a web application that provides an interactive map for locating various points of interest within the Unesp campus. It is built using React, TypeScript, and Vite, ensuring a fast and efficient development experience.
+This project is a web application that provides an interactive map for locating various points of interest within the Unesp RC campus. It is built using React, TypeScript, and Vite, ensuring a fast and efficient development experience.
 
 ## Features
 
