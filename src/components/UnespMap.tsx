@@ -76,10 +76,9 @@ const SearchBar = ({ locations }: { locations: Array<Location> }) => {
   );
 };
 
-const FilterBar = ({ locations }: { locations: Array<Location> }) => {
+const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Location>, showPopup: boolean, setShowPopup: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const map = useMap();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [showPopup, setShowPopup] = useState<boolean>(false);
   const [filteredLocations, setFilteredLocations] = useState(locations);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -102,7 +101,7 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
     <>
       <div style={{
         position: 'absolute',
-        top: '90%',
+        top: '80%',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 1000,
@@ -113,25 +112,25 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
         width: '300px'
       }}>
         <div className="d-flex justify-content-between">
-        <label htmlFor="category-select">Filtrar por categoria:  </label>
-        <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} style={{'width':'80%','height':'10%'}} className="form-select-sm rounded mt-1">
-          <option value="all">Todas</option>
-          <option value="mercado">Mercado</option>
-          <option value="padaria">Padaria</option>
-          <option value="hortifrutti/mercearia">Hortifrutti/Mercearia</option>
-          <option value="bar">Bar</option>
-          <option value="farmacia">Farmácia</option>
-          <option value="academia">Academia</option>
-          <option value="unidadeSaude">Unidade de Saúde</option>
-          <option value="entrada">Entrada</option>
-          <option value="shopping">Shopping</option>
-        </select>
+          <label htmlFor="category-select">Filtrar por categoria:  </label>
+          <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} style={{ 'width': '80%', 'height': '10%' }} className="form-select-sm rounded mt-1">
+            <option value="all">Todas</option>
+            <option value="mercado">Mercado</option>
+            <option value="padaria">Padaria</option>
+            <option value="hortifrutti/mercearia">Hortifrutti/Mercearia</option>
+            <option value="bar">Bar</option>
+            <option value="farmacia">Farmácia</option>
+            <option value="academia">Academia</option>
+            <option value="unidadeSaude">Unidade de Saúde</option>
+            <option value="entrada">Entrada</option>
+            <option value="shopping">Shopping</option>
+          </select>
         </div>
       </div>
       {showPopup && (
         <div style={{
           position: 'absolute',
-          top: '150px',
+          top: '10%',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 1000,
@@ -139,18 +138,17 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
           padding: '10px',
           borderRadius: '8px',
           boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          maxHeight: '300px',
-          overflowY: 'auto',
+          overflowY: 'scroll',
           width: '300px'
         }}>
           <h4>Locais filtrados:</h4>
           <div className="row">
             {filteredLocations.map((location, index) => (
-              <div key={index} className="col-md-6 mb-3">
-                <div className="card cursor-pointer" onClick={() => handleLocationClick(location.position)}>
-                  <div className="card-body">
-                    <strong><p className="card-title text-primary">{location.name}</p></strong>
-                    <p className="card-text">{location.address}</p>
+              <div key={index} className="col-12 col-sm-6 col-md-4 mb-1">
+                <div className="card" onClick={() => handleLocationClick(location.position)}>
+                  <div className="card-body" style={{ padding: '10px' }}>
+                    <strong><small className="card-title text-primary" style={{ fontSize: '14px', margin: '0' }}>{location.name}</small></strong>
+                    <p className="card-text" style={{ fontSize: '12px', margin: '0' }}>{location.address}</p>
                   </div>
                 </div>
               </div>
@@ -165,50 +163,50 @@ const FilterBar = ({ locations }: { locations: Array<Location> }) => {
 
 const UnespMap: React.FC = () => {
   const [showInfo, setShowInfo] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);
   };
 
-
   return (
     <div className="position-relative">
-    <button
-      onClick={toggleInfo}
-      className="btn btn-info rounded-circle btn-sm position-absolute"
-      style={{
-        top: '80%',
-        left: '85%',
-        zIndex: 1000,
-        width: '40px',
-        height: '40px',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-        cursor: 'pointer'
-      }}
-    >
-      ?
-    </button>
-    {showInfo && (
-      <div className="position-absolute bg-white rounded shadow" style={{ top: '10%', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, width: '80%' }}>
-        <button
-          onClick={toggleInfo}
-          className="btn-close float-end"
-          style={{ zIndex: 1001 }}
-        />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis, nunc nec aliquam vulputate, ipsum diam scelerisque sapien, quis pulvinar dolor sapien aliquam nulla. Vivamus eleifend ante vel elementum eleifend. Morbi sapien justo, convallis at ipsum in, dignissim consequat neque. Quisque tristique tellus nec convallis ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vehicula enim non dignissim commodo. Nulla facilisi.
-        </p>
-        <p>
-          lucasbaralm@gmail.com
-        </p>
-      </div>
-  )}
+      <button
+        onClick={toggleInfo}
+        className="btn btn-info rounded-circle btn-sm position-absolute"
+        style={{
+          top: '70%',
+          left: '85%',
+          zIndex: 1000,
+          width: '40px',
+          height: '40px',
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer'
+        }}
+      >
+        ?
+      </button>
+      {showInfo && (
+        <div className="position-absolute bg-white rounded shadow" style={{ top: '10%', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, width: '80%' }}>
+          <button
+            onClick={toggleInfo}
+            className="btn-close float-end"
+            style={{ zIndex: 1001 }}
+          />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis, nunc nec aliquam vulputate, ipsum diam scelerisque sapien, quis pulvinar dolor sapien aliquam nulla. Vivamus eleifend ante vel elementum eleifend. Morbi sapien justo, convallis at ipsum in, dignissim consequat neque. Quisque tristique tellus nec convallis ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vehicula enim non dignissim commodo. Nulla facilisi.
+          </p>
+          <p>
+            lucasbaralm@gmail.com
+          </p>
+        </div>
+      )}
 
       <MapContainer center={[-22.396403727665906, -47.54857750418907]} zoom={16} scrollWheelZoom={true}>
         <SearchBar locations={locations} />
-        <FilterBar locations={locations} />
+        <FilterBar locations={locations}  showPopup={showPopup} setShowPopup={setShowPopup} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
