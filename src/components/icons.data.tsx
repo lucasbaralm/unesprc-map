@@ -1,18 +1,13 @@
 import redMarker from '../assets/markers/marker-icon-2x-red.png';
 import greenMarker from '../assets/markers/marker-icon-2x-green.png';
 import blueMarker from '../assets/markers/marker-icon-2x-blue.png';
-import yellowMarker from '../assets/markers/marker-icon-2x-yellow.png';
 import violetMarker from '../assets/markers/marker-icon-2x-violet.png';
 import orangeMarker from '../assets/markers/marker-icon-2x-orange.png';
 import greyMarker from '../assets/markers/marker-icon-2x-grey.png';
 import goldMarker from '../assets/markers/marker-icon-2x-gold.png';
 import blackMarker from '../assets/markers/marker-icon-2x-black.png';
 import cianMarker from '../assets/markers/marker-icon-2x-cian.png';
-import deeporangeMarker from '../assets/markers/marker-icon-2x-deeporange.png';
-import deepredMarker from '../assets/markers/marker-icon-2x-deepred.png';
-import deepvioletMarker from '../assets/markers/marker-icon-2x-deepviolet.png';
 import navyMarker from '../assets/markers/marker-icon-2x-navy.png';
-import pinkMarker from '../assets/markers/marker-icon-2x-pink.png';
 import wineMarker from '../assets/markers/marker-icon-2x-wine.png';
 import { Icon } from 'leaflet';
 
