@@ -297,13 +297,24 @@ const UnespMap: React.FC = () => {
             className="btn-close float-end"
             style={{ zIndex: 1001 }}
           />
-          <div className="container-fluid" style={{ fontSize: '0.8rem' ,padding: '1.25rem', overflowY: 'auto', wordWrap: 'break-word', overflowWrap: 'break-word', whiteSpace: 'normal' }}>
+          <div className="container-fluid" style={{ fontSize: '0.8rem', padding: '1.25rem', overflowY: 'auto', wordWrap: 'break-word', overflowWrap: 'break-word', whiteSpace: 'normal' }}>
             {renderPageContent()}
           </div>
+          <div className="text-center mt-2 small">
+            <span>{currentPage}/2</span>
+          </div>
           <div className="d-flex justify-content-between mt-3">
-              {currentPage > 1 && <button onClick={handlePreviousPage} className="btn btn-primary">Anterior</button>}
-              {currentPage < 2 && <button onClick={handleNextPage} className="btn btn-primary ms-auto">Próxima</button>}
-            </div>
+            {currentPage > 1 && (
+              <button onClick={handlePreviousPage} className="btn btn-primary border mb-2 px-3 py-2">
+                &larr; Anterior
+              </button>
+            )}
+            {currentPage < 2 && (
+              <button onClick={handleNextPage} className="btn btn-primary ms-auto border mb-2 px-3 py-2">
+                Próxima &rarr;
+              </button>
+            )}
+          </div>
         </div>
       )}
 
