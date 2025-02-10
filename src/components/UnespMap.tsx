@@ -210,6 +210,7 @@ const UnespMap: React.FC = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [showLegend, setShowLegend] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);
@@ -217,6 +218,40 @@ const UnespMap: React.FC = () => {
 
   const toggleLegend = () => {
     setShowLegend(!showLegend);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const renderPageContent = () => {
+    if (currentPage === 1) {
+      return (
+        <>
+          <h3>Bem-vinde, ingressante!</h3>
+          <p>
+            Você provavelmente chegou em Rio Claro sem ter muita noção dos comércios que existem nas proximidades da Unesp.
+            Para resolver esse problema, desenvolvemos esse mapa interativo que conta com pontos de interesse para você conhecer nesses primeiros meses dessa nova etapa da sua vida.
+            Ele está dividido em categorias, cada uma com uma cor específica associada aos seus marcadores.
+          </p>
+          <p>
+            Esperamos que ele te ajude bastante; se quiser, pode compartilhar com outras pessoas à vontade. (:
+          </p>
+        </>
+      );
+    } else if (currentPage === 2) {
+      return (
+        <div>
+          <p><strong>Ideia concebida pela Comissão de Recepção da Biologia do ano de 2025</strong>; se precisar entrar em contato, envie uma mensagem para o Instagram <a href="https://instagram.com/cr.bio.rc" target="_blank">@cr.bio.rc</a>.</p>
+          <p>Mapa elaborado por Lucas Barbosa, para contato, enviar e-mail para <a href="mailto:lucasbaralm@gmail.com">lucasbaralm@gmail.com</a>.</p>
+          <p><strong>Última atualização:</strong> 09/02/2025 </p>
+        </div>
+      );
+    }
   };
 
   return (
@@ -262,22 +297,13 @@ const UnespMap: React.FC = () => {
             className="btn-close float-end"
             style={{ zIndex: 1001 }}
           />
-          <div className="container-fluid" style={{ fontSize: '0.9rem', padding: '1.25rem', overflowY: 'auto' }}>
-            <h3>Bem-vinde, ingressante!</h3>
-            <p>
-              Você provavelmente chegou em Rio Claro sem ter muita noção dos comércios que existem nas proximidades da Unesp.
-              Para resolver esse problema, desenvolvemos esse mapa interativo que conta com pontos de interesse para você conhecer nesses primeiros meses dessa nova etapa da sua vida.
-              Ele está dividido em categorias, cada uma com uma cor específica associada aos seus marcadores.
-            </p>
-            <p>
-              Esperamos que ele te ajude bastante; se quiser, pode compartilhar com outras pessoas à vontade. (:
-            </p>
-            <div>
-              <p><strong>Ideia concebida pela Comissão de Recepção da Biologia do ano de 2025</strong>; se precisar entrar em contato, envie uma mensagem para o Instagram <a href="https://instagram.com/cr.bio.rc" target="_blank">@cr.bio.rc</a>.</p>
-              <p>Mapa elaborado por Lucas Barbosa, para contato, enviar e-mail para <a href="mailto:lucasbaralm@gmail.com">lucasbaralm@gmail.com</a>.</p>
-              <p><strong>Última atualização:</strong> 09/02/2025 </p>
-            </div>
+          <div className="container-fluid" style={{ fontSize: '0.8rem' ,padding: '1.25rem', overflowY: 'auto', wordWrap: 'break-word', overflowWrap: 'break-word', whiteSpace: 'normal' }}>
+            {renderPageContent()}
           </div>
+          <div className="d-flex justify-content-between mt-3">
+              {currentPage > 1 && <button onClick={handlePreviousPage} className="btn btn-primary">Anterior</button>}
+              {currentPage < 2 && <button onClick={handleNextPage} className="btn btn-primary ms-auto">Próxima</button>}
+            </div>
         </div>
       )}
 
