@@ -1,7 +1,7 @@
 export type Location = {
   name: string;
   position: [number, number];
-  category: 'mercado' | 'padaria' | 'hortifrutti/mercearia' | 'bar' | 'farmacia' | 'academia' | 'unidadeSaude' | 'entrada' | 'shopping'|'rodoviaria'| 'restaurante' | 'caixaEletronico';
+  category: 'mercado' | 'padaria' | 'hortifrutti/mercearia' | 'bar' | 'farmacia' | 'academia' | 'unidadeSaude' | 'entrada' | 'shopping'|'rodoviaria'| 'restaurante' | 'caixaEletronico' | 'moradia';
   address: string;
 };
 
@@ -192,6 +192,16 @@ export const locations: Location[] = [
     position: [-22.41705975425777, -47.57590536434472],
     category: 'rodoviaria',
     address: 'Av. Pres. Tancredo de Almeida Neves, 700 - Jardim Claret'
+    },
+    {name: 'Bom Prato Rio Claro',
+      position: [-22.40533063009526, -47.55934999889686],
+      category: 'restaurante',
+      address: 'R. Um, 1534 - Centro'
+    },
+    {name: 'Moradia Estudantil Unesp Rio Claro',
+      position: [-22.401195426335033, -47.54413244994922],
+      category: 'moradia',
+      address: 'Av. 16 A, 1300 - Bela Vista'
     }
 
   ];

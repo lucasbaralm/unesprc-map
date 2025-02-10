@@ -125,6 +125,8 @@ const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Lo
             <option value="entrada">Entrada</option>
             <option value="shopping">Shopping</option>
             <option value="rodoviaria">Rodoviária</option>
+            <option value="restaurante">Restaurante</option>
+            <option value='moradia'>Moradia</option>
           </select>
         </div>
       </div>
@@ -162,12 +164,59 @@ const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Lo
   );
 };
 
+const LegendPopup = ({ showLegend, setShowLegend }: { showLegend: boolean, setShowLegend: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  return (
+    <>
+      {showLegend && (
+        <div style={{
+          position: 'absolute',
+          top: '10%',
+          right: '10%',
+          zIndex: 1000,
+          backgroundColor: 'white',
+          padding: '10px',
+          borderRadius: '8px',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+          width: '200px'
+        }}>
+          <button
+            onClick={() => setShowLegend(false)}
+            className="btn-close position-absolute"
+            style={{ top: '10px', right: '10px' }}
+          />
+          <h4>Legenda</h4>
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+            <li><img src={icons.mercado.options.iconUrl} alt="Mercado" style={{ width: '20px', marginRight: '10px' }} />Mercado</li>
+            <li><img src={icons.padaria.options.iconUrl} alt="Padaria" style={{ width: '20px', marginRight: '10px' }} />Padaria</li>
+            <li><img src={icons['hortifrutti/mercearia'].options.iconUrl} alt="Hortifrutti/Mercearia" style={{ width: '20px', marginRight: '10px' }} /> Mercearia </li>
+            <li><img src={icons.bar.options.iconUrl} alt="Bar" style={{ width: '20px', marginRight: '10px' }} />Bar</li>
+            <li><img src={icons.farmacia.options.iconUrl} alt="Farmácia" style={{ width: '20px', marginRight: '10px' }} />Farmácia</li>
+            <li><img src={icons.academia.options.iconUrl} alt="Academia" style={{ width: '20px', marginRight: '10px' }} />Academia</li>
+            <li><img src={icons.unidadeSaude.options.iconUrl} alt="UPA/USF" style={{ width: '20px', marginRight: '10px' }} />UPA/USF</li>
+            <li><img src={icons.entrada.options.iconUrl} alt="Entrada" style={{ width: '20px', marginRight: '10px' }} />Entrada</li>
+            <li><img src={icons.shopping.options.iconUrl} alt="Shopping" style={{ width: '20px', marginRight: '10px' }} />Shopping</li>
+            <li><img src={icons.rodoviaria.options.iconUrl} alt="Rodoviária" style={{ width: '20px', marginRight: '10px' }} />Rodoviária</li>
+            <li><img src={icons.restaurante.options.iconUrl} alt="Restaurante" style={{ width: '20px', marginRight: '10px' }} />Restaurante</li>
+            <li><img src={icons.moradia.options.iconUrl} alt="Moradia" style={{ width: '20px', marginRight: '10px' }} />Moradia</li>
+          </ul>
+          <button onClick={() => setShowLegend(false)} className="btn btn-secondary mt-2">Fechar</button>
+        </div>
+      )}
+    </>
+  );
+};
+
 const UnespMap: React.FC = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showLegend, setShowLegend] = useState(false);
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);
+  };
+
+  const toggleLegend = () => {
+    setShowLegend(!showLegend);
   };
 
   return (
@@ -187,7 +236,24 @@ const UnespMap: React.FC = () => {
           cursor: 'pointer'
         }}
       >
-        ?
+        <strong>?</strong>
+      </button>
+      <button
+        onClick={toggleLegend}
+        className="btn btn-info rounded-circle btn-sm position-absolute"
+        style={{
+          top: '60%',
+          left: '85%',
+          zIndex: 1000,
+          width: '40px',
+          height: '40px',
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer'
+        }}
+      >
+        <strong>i</strong>
       </button>
       {showInfo && (
         <div className="position-absolute bg-white rounded shadow" style={{ top: '10%', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, width: '80%' }}>
@@ -196,18 +262,30 @@ const UnespMap: React.FC = () => {
             className="btn-close float-end"
             style={{ zIndex: 1001 }}
           />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis, nunc nec aliquam vulputate, ipsum diam scelerisque sapien, quis pulvinar dolor sapien aliquam nulla. Vivamus eleifend ante vel elementum eleifend. Morbi sapien justo, convallis at ipsum in, dignissim consequat neque. Quisque tristique tellus nec convallis ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vehicula enim non dignissim commodo. Nulla facilisi.
-          </p>
-          <p>
-            lucasbaralm@gmail.com
-          </p>
+          <div className="container-fluid" style={{ fontSize: '0.9rem', padding: '1.25rem', overflowY: 'auto' }}>
+            <h3>Bem-vinde, ingressante!</h3>
+            <p>
+              Você provavelmente chegou em Rio Claro sem ter muita noção dos comércios que existem nas proximidades da Unesp.
+              Para resolver esse problema, desenvolvemos esse mapa interativo que conta com pontos de interesse para você conhecer nesses primeiros meses dessa nova etapa da sua vida.
+              Ele está dividido em categorias, cada uma com uma cor específica associada aos seus marcadores.
+            </p>
+            <p>
+              Esperamos que ele te ajude bastante; se quiser, pode compartilhar com outras pessoas à vontade. (:
+            </p>
+            <div>
+              <p><strong>Ideia concebida pela Comissão de Recepção da Biologia do ano de 2025</strong>; se precisar entrar em contato, envie uma mensagem para o Instagram <a href="https://instagram.com/cr.bio.rc" target="_blank">@cr.bio.rc</a>.</p>
+              <p>Mapa elaborado por Lucas Barbosa, para contato, enviar e-mail para <a href="mailto:lucasbaralm@gmail.com">lucasbaralm@gmail.com</a>.</p>
+              <p><strong>Última atualização:</strong> 09/02/2025 </p>
+            </div>
+          </div>
         </div>
       )}
 
+      <LegendPopup showLegend={showLegend} setShowLegend={setShowLegend} />
+
       <MapContainer center={[-22.396403727665906, -47.54857750418907]} zoom={16} scrollWheelZoom={true}>
         <SearchBar locations={locations} />
-        <FilterBar locations={locations}  showPopup={showPopup} setShowPopup={setShowPopup} />
+        <FilterBar locations={locations} showPopup={showPopup} setShowPopup={setShowPopup} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

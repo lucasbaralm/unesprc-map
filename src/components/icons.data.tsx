@@ -77,4 +77,16 @@ export const icons = {
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   }),
+  restaurante: new Icon({
+    iconUrl: wineMarker,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  }),
+  moradia: new Icon({
+    iconUrl: cianMarker,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  }),
 };
