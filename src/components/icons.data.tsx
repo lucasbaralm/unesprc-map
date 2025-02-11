@@ -9,6 +9,7 @@ import blackMarker from '../assets/markers/marker-icon-2x-black.png';
 import cianMarker from '../assets/markers/marker-icon-2x-cian.png';
 import navyMarker from '../assets/markers/marker-icon-2x-navy.png';
 import wineMarker from '../assets/markers/marker-icon-2x-wine.png';
+import deeporangeMarker from '../assets/markers/marker-icon-2x-deeporange.png';
 import { Icon } from 'leaflet';
 
 export const icons = {
@@ -80,6 +81,12 @@ export const icons = {
   }),
   moradia: new Icon({
     iconUrl: cianMarker,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  }),
+  bicicletaria: new Icon({
+    iconUrl: deeporangeMarker,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],

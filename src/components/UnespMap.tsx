@@ -127,6 +127,7 @@ const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Lo
             <option value="rodoviaria">Rodoviária</option>
             <option value="restaurante">Restaurante</option>
             <option value='moradia'>Moradia</option>
+            <option value='bicicletaria'>Bicicletaria</option>
           </select>
         </div>
       </div>
@@ -198,6 +199,7 @@ const LegendPopup = ({ showLegend, setShowLegend }: { showLegend: boolean, setSh
             <li><img src={icons.rodoviaria.options.iconUrl} alt="Rodoviária" style={{ width: '20px', marginRight: '10px' }} />Rodoviária</li>
             <li><img src={icons.restaurante.options.iconUrl} alt="Restaurante" style={{ width: '20px', marginRight: '10px' }} />Restaurante</li>
             <li><img src={icons.moradia.options.iconUrl} alt="Moradia" style={{ width: '20px', marginRight: '10px' }} />Moradia</li>
+            <li><img src={icons.bicicletaria.options.iconUrl} alt="Bicicletaria" style={{ width: '20px', marginRight: '10px' }} />Bicicletaria</li>
           </ul>
           <button onClick={() => setShowLegend(false)} className="btn btn-secondary mt-2">Fechar</button>
         </div>
