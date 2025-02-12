@@ -29,43 +29,21 @@ const SearchBar = ({ locations }: { locations: Array<Location> }) => {
   };
 
   return (
-    <div style={{
-      position: 'absolute',
-      top: '20px',
-      left: '55%',
-      transform: 'translateX(-50%)',
-      zIndex: 1000,
-      width: '80%',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-      backgroundColor: 'white',
-      borderRadius: '8px'
-    }}>
+    <div className="absolute top-5 left-53/100 transform -translate-x-1/2 z-1000 w-7/9 shadow-md bg-white rounded-lg">
       <input
         type="text"
         placeholder="🔍 Buscar local..."
         value={search}
         onChange={handleSearch}
-        className='form-control'
+        className="form-control p-3 w-full rounded-lg border border-gray-300 text-sm outline-none box-border transition-all duration-200 ease-in-out"
       />
       {suggestions.length > 0 && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          backgroundColor: 'white',
-          border: '1px solid #e0e0e0',
-          borderRadius: '0 0 8px 8px',
-          marginTop: '4px',
-          maxHeight: '300px',
-          overflowY: 'auto',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-        }}>
+        <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-b-lg mt-1 max-h-72 overflow-y-auto shadow-lg">
           {suggestions.map((suggestion, index) => (
             <div
               key={index}
               onClick={() => handleSuggestionClick(suggestion)}
-              className="p-2 cursor-pointer border-bottom text-primary"
+              className="p-2 cursor-pointer border-b border-gray-200 transition-colors duration-200 ease-in-out text-sm text-primary"
             >
               {suggestion.name}
             </div>
@@ -99,21 +77,10 @@ const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Lo
 
   return (
     <>
-      <div style={{
-        position: 'absolute',
-        top: '80%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 1000,
-        backgroundColor: 'white',
-        padding: '10px',
-        borderRadius: '8px',
-        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-        width: '300px'
-      }}>
-        <div className="d-flex justify-content-between">
+      <div className="absolute top-41/50 left-1/2 transform -translate-x-1/2 z-1001 bg-white p-2 rounded-lg shadow-md w-65">
+        <div className="flex justify-between">
           <label htmlFor="category-select">Filtrar por categoria:  </label>
-          <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} style={{ 'width': '80%', 'height': '10%' }} className="form-select-sm rounded mt-1">
+          <select id="category-select" value={selectedCategory} onChange={handleCategoryChange} className="form-select-sm rounded mt-1 w-4/5 h-7">
             <option value="all">Todas</option>
             <option value="mercado">Mercado</option>
             <option value="padaria">Padaria</option>
@@ -132,27 +99,15 @@ const FilterBar = ({ locations, showPopup, setShowPopup }: { locations: Array<Lo
         </div>
       </div>
       {showPopup && (
-        <div style={{
-          position: 'absolute',
-          top: '10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 1000,
-          backgroundColor: 'white',
-          padding: '10px',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          overflowY: 'scroll',
-          width: '300px'
-        }}>
+        <div className="absolute top-10 left-1/2 transform -translate-x-1/2 z-1000 bg-white p-2 rounded-lg shadow-md overflow-y-scroll w-72">
           <h4>Locais filtrados:</h4>
           <div className="row">
             {filteredLocations.map((location, index) => (
               <div key={index} className="col-12 col-sm-6 col-md-4 mb-1">
                 <div className="card" onClick={() => handleLocationClick(location.position)}>
-                  <div className="card-body" style={{ padding: '10px' }}>
-                    <strong><small className="card-title text-primary" style={{ fontSize: '14px', margin: '0' }}>{location.name}</small></strong>
-                    <p className="card-text" style={{ fontSize: '12px', margin: '0' }}>{location.address}</p>
+                  <div className="card-body p-2">
+                    <strong><small className="card-title text-primary text-sm m-0">{location.name}</small></strong>
+                    <p className="card-text text-xs m-0">{location.address}</p>
                   </div>
                 </div>
               </div>
@@ -169,39 +124,30 @@ const LegendPopup = ({ showLegend, setShowLegend }: { showLegend: boolean, setSh
   return (
     <>
       {showLegend && (
-        <div style={{
-          position: 'absolute',
-          top: '10%',
-          right: '10%',
-          zIndex: 1000,
-          backgroundColor: 'white',
-          padding: '10px',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          width: '200px'
-        }}>
+        <div className="absolute top-20 right-10 z-1001 bg-white p-2 rounded-lg shadow-md w-33">
           <button
             onClick={() => setShowLegend(false)}
-            className="btn-close position-absolute"
-            style={{ top: '10px', right: '10px' }}
+            className="btn-close absolute top-2 right-2"
           />
-          <h4>Legenda</h4>
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
-            <li><img src={icons.mercado.options.iconUrl} alt="Mercado" style={{ width: '20px', marginRight: '10px' }} />Mercado</li>
-            <li><img src={icons.padaria.options.iconUrl} alt="Padaria" style={{ width: '20px', marginRight: '10px' }} />Padaria</li>
-            <li><img src={icons['hortifrutti/mercearia'].options.iconUrl} alt="Hortifrutti/Mercearia" style={{ width: '20px', marginRight: '10px' }} /> Mercearia </li>
-            <li><img src={icons.bar.options.iconUrl} alt="Bar" style={{ width: '20px', marginRight: '10px' }} />Bar</li>
-            <li><img src={icons.farmacia.options.iconUrl} alt="Farmácia" style={{ width: '20px', marginRight: '10px' }} />Farmácia</li>
-            <li><img src={icons.academia.options.iconUrl} alt="Academia" style={{ width: '20px', marginRight: '10px' }} />Academia</li>
-            <li><img src={icons.unidadeSaude.options.iconUrl} alt="UPA/USF" style={{ width: '20px', marginRight: '10px' }} />UPA/USF</li>
-            <li><img src={icons.entrada.options.iconUrl} alt="Entrada" style={{ width: '20px', marginRight: '10px' }} />Entrada</li>
-            <li><img src={icons.shopping.options.iconUrl} alt="Shopping" style={{ width: '20px', marginRight: '10px' }} />Shopping</li>
-            <li><img src={icons.rodoviaria.options.iconUrl} alt="Rodoviária" style={{ width: '20px', marginRight: '10px' }} />Rodoviária</li>
-            <li><img src={icons.restaurante.options.iconUrl} alt="Restaurante" style={{ width: '20px', marginRight: '10px' }} />Restaurante</li>
-            <li><img src={icons.moradia.options.iconUrl} alt="Moradia" style={{ width: '20px', marginRight: '10px' }} />Moradia</li>
-            <li><img src={icons.bicicletaria.options.iconUrl} alt="Bicicletaria" style={{ width: '20px', marginRight: '10px' }} />Bicicletaria</li>
+          <div className='text-blue-800'>
+            <h4 className="text-sm text-blue-800">Legenda</h4>
+          </div>
+          <ul className="list-none p-0">
+            <li className="flex items-center mb-1"><img src={icons.mercado.options.iconUrl} alt="Mercado" className="w-4 mr-2" />Mercado</li>
+            <li className="flex items-center mb-1"><img src={icons.padaria.options.iconUrl} alt="Padaria" className="w-4 mr-2" />Padaria</li>
+            <li className="flex items-center mb-1"><img src={icons['hortifrutti/mercearia'].options.iconUrl} alt="Hortifrutti/Mercearia" className="w-4 mr-2" /> Mercearia </li>
+            <li className="flex items-center mb-1"><img src={icons.bar.options.iconUrl} alt="Bar" className="w-4 mr-2" />Bar</li>
+            <li className="flex items-center mb-1"><img src={icons.farmacia.options.iconUrl} alt="Farmácia" className="w-4 mr-2" />Farmácia</li>
+            <li className="flex items-center mb-1"><img src={icons.academia.options.iconUrl} alt="Academia" className="w-4 mr-2" />Academia</li>
+            <li className="flex items-center mb-1"><img src={icons.unidadeSaude.options.iconUrl} alt="UPA/USF" className="w-4 mr-2" />UPA/USF</li>
+            <li className="flex items-center mb-1"><img src={icons.entrada.options.iconUrl} alt="Entrada" className="w-4 mr-2" />Entrada</li>
+            <li className="flex items-center mb-1"><img src={icons.shopping.options.iconUrl} alt="Shopping" className="w-4 mr-2" />Shopping</li>
+            <li className="flex items-center mb-1"><img src={icons.rodoviaria.options.iconUrl} alt="Rodoviária" className="w-4 mr-2" />Rodoviária</li>
+            <li className="flex items-center mb-1"><img src={icons.restaurante.options.iconUrl} alt="Restaurante" className="w-4 mr-2" />Restaurante</li>
+            <li className="flex items-center mb-1"><img src={icons.moradia.options.iconUrl} alt="Moradia" className="w-4 mr-2" />Moradia</li>
+            <li className="flex items-center mb-1"><img src={icons.bicicletaria.options.iconUrl} alt="Bicicletaria" className="w-4 mr-2" />Bicicletaria</li>
           </ul>
-          <button onClick={() => setShowLegend(false)} className="btn btn-secondary mt-2">Fechar</button>
+          <button onClick={() => setShowLegend(false)} className="btn btn-secondary mt-2 text-xs">Fechar</button>
         </div>
       )}
     </>
@@ -257,55 +203,32 @@ const UnespMap: React.FC = () => {
   };
 
   return (
-    <div className="position-relative">
+    <div className="relative">
       <button
         onClick={toggleInfo}
-        className="btn btn-info rounded-circle btn-sm position-absolute"
-        style={{
-          top: '70%',
-          left: '85%',
-          zIndex: 1000,
-          width: '40px',
-          height: '40px',
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          cursor: 'pointer'
-        }}
+        className="btn btn-info rounded-circle btn-sm absolute top-3/4 left-5/6 z-1000 w-10 h-10 bg-white rounded-lg shadow-md cursor-pointer"
       >
         <strong>?</strong>
       </button>
       <button
         onClick={toggleLegend}
-        className="btn btn-info rounded-circle btn-sm position-absolute"
-        style={{
-          top: '60%',
-          left: '85%',
-          zIndex: 1000,
-          width: '40px',
-          height: '40px',
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          cursor: 'pointer'
-        }}
+        className="btn btn-info rounded-circle btn-sm absolute top-2/3 left-5/6 z-1000 w-10 h-10 bg-white rounded-lg shadow-md cursor-pointer"
       >
         <strong>i</strong>
       </button>
       {showInfo && (
-        <div className="position-absolute bg-white rounded shadow" style={{ top: '10%', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, width: '80%' }}>
+        <div className="absolute bg-white rounded shadow top-10 left-1/2 transform -translate-x-1/2 z-1002 w-4/5">
           <button
             onClick={toggleInfo}
-            className="btn-close float-end"
-            style={{ zIndex: 1001 }}
+            className="btn-close float-end z-1002"
           />
-          <div className="container-fluid" style={{ fontSize: '0.8rem', padding: '1.25rem', overflowY: 'auto', wordWrap: 'break-word', overflowWrap: 'break-word', whiteSpace: 'normal' }}>
+          <div className="container-fluid text-xs p-5 overflow-y-auto break-words">
             {renderPageContent()}
           </div>
-          <div className="text-center mt-2 small">
+          <div className="text-center mt-2 text-xs">
             <span>{currentPage}/2</span>
           </div>
-          <div className="d-flex justify-content-between mt-3">
+          <div className="flex justify-between mt-3">
             {currentPage > 1 && (
               <button onClick={handlePreviousPage} className="btn btn-primary border mb-2 px-3 py-2">
                 &larr; Anterior
