@@ -245,7 +245,7 @@ const UnespMap: React.FC = () => {
 
       <LegendPopup showLegend={showLegend} setShowLegend={setShowLegend} />
 
-      <MapContainer center={[-22.396403727665906, -47.54857750418907]} zoom={16} scrollWheelZoom={true}>
+      <MapContainer center={[-22.396403727665906, -47.54557750418907]} zoom={16} scrollWheelZoom={true}>
         <SearchBar locations={locations} />
         <FilterBar locations={locations} showPopup={showPopup} setShowPopup={setShowPopup} />
         <TileLayer
